@@ -87,15 +87,15 @@ def get_latest_mid_data():
     return None
 
 # --- 1. Google Sheets 連携設定 ---
-    # 接続の準備（これは共通）
-    scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-    creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
-    client = gspread.authorize(creds)
-    
-   # スプレッドシートとワークシートを開く
-    SHEET_URL = "https://docs.google.com/spreadsheets/d/1VcxqJkEXOb7Hh8YSrElekjiGlDSUVe5S7Q2OFVLo2NE/edit?usp=sharing"
-    sh = client.open_by_url(SHEET_URL)
-    ws =sh.worksheet("データ")
+# 接続の準備（これは共通）
+scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
+client = gspread.authorize(creds)
+
+# スプレッドシートとワークシートを開く
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1VcxqJkEXOb7Hh8YSrElekjiGlDSUVe5S7Q2OFVLo2NE/edit?usp=sharing"
+sh = client.open_by_url(SHEET_URL)
+ws =sh.worksheet("データ")
 
 def get_worksheet():
     try:
@@ -111,6 +111,7 @@ def get_worksheet():
             st.session_state.val_new = int(raw_new) if str(raw_new).isdigit() else 0
             st.session_state.val_repeat = int(raw_repeat) if str(raw_repeat).isdigit() else 0
             st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
+            st.text("新規 : ", [session_state.val_new],"名")
             st.success("スプレッドシートから同期したよ！")
         else:
             st.warning(f"スプレッドシートに {dt_day}日の列が見つからないみたい。")
@@ -257,7 +258,7 @@ with btn_col2:
 新規　　　{st.session_state.val_new}名
 リピ　　　{st.session_state.val_repeat}名
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
-計　　　　{st.session_state.all_costomer}名
+計　　　　{all_costomer}名
 
 【来店者記録】
 {names_str}
