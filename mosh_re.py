@@ -83,7 +83,7 @@ def get_latest_mid_data():
 def get_worksheet():
     # --- 1. 接続の準備（これは共通） ---
     scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-    creds = Credentials.from_service_account_file('/Users/ruri/Documents/mosh_report/secrets.json', scopes=scope)
+    creds = Credentials.from_service_account_file('secrets.json', scopes=scope)
     client = gspread.authorize(creds)
     
    # スプレッドシートとワークシートを開く
