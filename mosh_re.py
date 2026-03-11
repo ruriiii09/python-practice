@@ -104,7 +104,6 @@ def get_worksheet():
     #cell_repeat = 0
     cell_repeat = ws.cell(cell.row + 3, cell.col)
     all_customer = int(cell_new.value or 0) + int(cell_repeat.value or 0)
-    #print(f"下のセルの値: {cell_below.value}")
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
@@ -186,7 +185,7 @@ with tab1:
                 now_date = datetime.now().strftime("%Y/%m/%d")
             except Exception as e:
                 st.error(f"まだ人数が入力されていません: {e}")
-            st.info(f"同期完了（新規：{cell_new.value}名 / リピーター：{cell_repeat.value}名 計：{all_customer}名）") 
+            st.info(f"同期完了（新規：{cell_new.value or 0}名 / リピーター：{cell_repeat.value or 0}名 計：{all_customer}名）") 
 
     # 自動転記ボタン（目立つように配置
     st.button("📋 中間報告の内容を自動入力", on_click=sync_mid_report, use_container_width=True)
