@@ -190,6 +190,26 @@ with tab1:
 
     # 自動転記ボタン（目立つように配置
     st.button("📋 中間報告の内容を自動入力", on_click=sync_mid_report, use_container_width=True)
+with tab2:
+    st.subheader("📅 履歴検索")
+    search_date = st.date_input("確認したい日", datetime.now().date())
+    # SQLで読み込み
+    query = "SELECT * FROM daily_reports_v2 WHERE report_date = ?"
+    history_df = pd.read_sql(query, conn, params=(str(search_date),))
+    
+    if not history_df.empty:
+        for _, row in history_df.iterrows():
+            with st.expander(f"{row['report_type']} ({row['created_at'][11:16]})"):
+                st.text(row['content'])
+    else:
+        st.info("記録がありません。")
+
+
+# --- 設定：スマホで見た時にサイドバーが邪魔にならないよう調整 ---
+st.set_page_config(page_title="Mosh Report", layout="centered", initial_sidebar_state="collapsed")
+
+get_worksheet()
+
 
     
     st.subheader("📋 報告事項")
@@ -285,23 +305,3 @@ with tab1:
             save_report(str(datetime.now().date()), "終業", final_txt, report_data)
             st.balloons()
             st.code(final_txt)
-
-with tab2:
-    st.subheader("📅 履歴検索")
-    search_date = st.date_input("確認したい日", datetime.now().date())
-    # SQLで読み込み
-    query = "SELECT * FROM daily_reports_v2 WHERE report_date = ?"
-    history_df = pd.read_sql(query, conn, params=(str(search_date),))
-    
-    if not history_df.empty:
-        for _, row in history_df.iterrows():
-            with st.expander(f"{row['report_type']} ({row['created_at'][11:16]})"):
-                st.text(row['content'])
-    else:
-        st.info("記録がありません。")
-
-
-# --- 設定：スマホで見た時にサイドバーが邪魔にならないよう調整 ---
-st.set_page_config(page_title="Mosh Report", layout="centered", initial_sidebar_state="collapsed")
-
-get_worksheet()
