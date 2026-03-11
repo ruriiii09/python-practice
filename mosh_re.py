@@ -99,11 +99,13 @@ def get_worksheet():
     global cell_new
     global cell_repeat
     global all_customer
-    #cell_new = 0
+    
     cell_new = ws.cell(cell.row + 2, cell.col)
-    #cell_repeat = 0
     cell_repeat = ws.cell(cell.row + 3, cell.col)
     all_customer = int(cell_new.value or 0) + int(cell_repeat.value or 0)
+    if cell is None or cell.value is None:
+            st.error(f"スプレッドシートの {dt_day}日の列が見つかりません。")
+            return
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
