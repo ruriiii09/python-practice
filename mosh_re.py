@@ -12,6 +12,8 @@ if 'val_repeat' not in st.session_state:
     st.session_state.val_repeat = 0
 if 'all_customer' not in st.session_state:
     st.session_state.all_customer = 0
+if 'show_report' not in st.session_state:
+    st.session_state.show_report = ""
 
 #dt_year = datetime.now().year
 #dt_month = datetime.now().month
@@ -251,7 +253,7 @@ with btn_col1:
 """
         save_report(str(datetime.now().date()), "中間", mid_txt, report_data)
         # 生成した文章を session_state に保存
-        st.session_state.show_report = mid_report
+        st.session_state.show_report = mid_txt
         #st.code(mid_txt)
 with btn_col2:
     if st.button("🚀 最終報告を保存", use_container_width=True):
@@ -292,7 +294,7 @@ with btn_col2:
 """
         save_report(str(datetime.now().date()), "終業", final_txt, report_data)
         # 生成した文章を session_state に保存
-        st.session_state.show_report = final_report
+        st.session_state.show_report = final_txt
         #st.code(final_txt)
 
 # 🚨 ここがポイント！カラム（with col_...）から「出た」ところで表示する
