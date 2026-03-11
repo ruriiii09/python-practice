@@ -142,7 +142,10 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 st.header("📋 報告事項の入力")
-cat4 = st.text("月：めいらく発注 --- 火：可燃、ダンボ（第1,3は全部捨てる） --- 水：床水拭き --- 金：可燃、ダンボ")
+cat4 = st.text("月：めいらく発注")
+cat5 = st.text("火：可燃、ダンボ（第1,3は全部捨てる")
+cat6 = st.text("水：床水拭き")
+cat7 = st.text("金：可燃、ダンボ")
 col1, col2, col3 = st.columns(3)
 
 # --- 4. 自動転記ボタンの処理 ---
