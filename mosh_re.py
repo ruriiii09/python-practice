@@ -114,6 +114,7 @@ def get_worksheet():
 
     except Exception as e:
         st.error(f"データ取得中にエラーが起きたよ: {e}")
+    
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
     items = [f"{item}" for item in selected]
@@ -124,36 +125,6 @@ def format_items(selected, added):
 # --- 3. アプリ設定 ---
 st.set_page_config(page_title="終業報告アプリ", layout="wide")
 st.title("終業報告アプリ")
-
-# --- サイドバー：まず人数を記録 ---
-st.sidebar.header("📊 ステップ1：人数記録")
-
-if st.sidebar.button("スプシから取得"):
-    try:
-        ws = get_worksheet()
-        now_date = datetime.now().strftime("%Y/%m/%d")
-        st.sidebar.text(f"新規：{val_new}名")
-        st.sidebar.text(f"リピーター：{val_repeat}名")
-        st.sidebar.text(f"計：{all_customer}名")
-    except Exception as e:
-        st.error(f"まだ人数が入力されていません: {e}")
-#ws.append_row([now_date, visitor_count])
-#st.sidebar.success(f" の人数を記録したよ！")
-
-# --- サイドバー：カレンダーと履歴 ---
-st.sidebar.title("📅 過去の報告を確認")
-view_date = st.sidebar.date_input("日付を選択", datetime.now().date())
-history_df = load_reports(str(view_date))
-
-if not history_df.empty:
-    st.sidebar.write(f"--- {view_date} の記録 ---")
-    for i, row in history_df.iterrows():
-        with st.sidebar.expander(f"{row['report_type']} ({row['created_at'][11:16]})"):
-            st.caption(row['content'])
-else:
-    st.sidebar.info("この日の記録はありません。")
-    
-
         
 # --- メイン画面：ステップ2：報告内容入力 ---
 st.header("📋 報告事項の入力")
@@ -189,14 +160,9 @@ with tab1:
     # ステップ1：人数取得
     with st.expander("📊 ステップ1：スプシから人数同期", expanded=False):
         if st.button("スプレッドシートから取得", use_container_width=True):
-            try:
-                ws = get_worksheet()
-                now_date = datetime.now().strftime("%Y/%m/%d")
-            except Exception as e:
-                st.error(f"まだ人数が入力されていません: {e}")
-            st.info(f"同期完了（新規：{cell_new.value or 0}名 / リピーター：{cell_repeat.value or 0}名 計：{all_customer}名）") 
+            get_worksheet()
 
-    # 自動転記ボタン（目立つように配置
+    # 自動転記ボタン（目立つように配置）
     st.button("📋 中間報告の内容を自動入力", on_click=sync_mid_report, use_container_width=True)
 with tab2:
     st.subheader("📅 履歴検索")
