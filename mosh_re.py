@@ -6,9 +6,12 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import re
 
-if 'val_new' not in st.session_state: st.session_state.val_new = 0
-if 'val_repeat' not in st.session_state: st.session_state.val_repeat = 0
-if 'all_customer' not in st.session_state: st.session_state.all_customer = 0
+if 'val_new' not in st.session_state:
+    st.session_state.val_new = 0
+if 'val_repeat' not in st.session_state:
+    st.session_state.val_repeat = 0
+if 'all_customer' not in st.session_state:
+    st.session_state.all_customer = 0
 
 #dt_year = datetime.now().year
 #dt_month = datetime.now().month
