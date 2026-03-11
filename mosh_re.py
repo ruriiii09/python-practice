@@ -95,18 +95,17 @@ def get_worksheet():
     sh = client.open_by_url(SHEET_URL)
     ws =sh.worksheet("データ")
 
-    # 3. 指定した数字を含むセルを検索
-    cell = ws.cell(2,dt_day+1)
-    
-    # 4. その下のセル(行を+1)を取得 グローバル化
-    # セルの値を数値として取得（空なら0にする）
-    raw_new = ws.cell(cell.row + 2, cell.col).value
-    raw_repeat = ws.cell(cell.row + 3, cell.col).value
+    try:
+        cell = ws.cell(2, dt_day + 1)
+        raw_new = ws.cell(cell.row + 2, cell.col).value
+        raw_repeat = ws.cell(cell.row + 3, cell.col).value
         
-    # 安全に数値変換
-    val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
-    val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
-    all_customer = st.session_state.val_new + st.session_state.val_repeat
+        # セッション状態（アプリ全体）に保存
+        st.session_state.val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
+        st.session_state.val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
+        st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
+    except Exception as e:
+        st.error(f"取得エラー: {e}")
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
