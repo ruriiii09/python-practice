@@ -84,8 +84,7 @@ def get_latest_mid_data():
     return None
 
 # --- 1. Google Sheets 連携設定 ---
-def get_worksheet():
-    # --- 1. 接続の準備（これは共通） ---
+    # 接続の準備（これは共通）
     scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
     creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
     client = gspread.authorize(creds)
@@ -95,8 +94,9 @@ def get_worksheet():
     sh = client.open_by_url(SHEET_URL)
     ws =sh.worksheet("データ")
 
+def get_worksheet():
     try:
-        # 2. 今日の日付のセルを探す
+        # 今日の日付のセルを探す
         cell = ws.cell(2, dt_day + 1)
         
         # 🚨 ここが重要：cellが取得できなかった場合の安全策
