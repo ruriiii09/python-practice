@@ -204,45 +204,42 @@ with tab2:
     else:
         st.info("記録がありません。")
 
-
 # --- 設定：スマホで見た時にサイドバーが邪魔にならないよう調整 ---
 st.set_page_config(page_title="Mosh Report", layout="centered", initial_sidebar_state="collapsed")
 
 get_worksheet()
-
-
+        
+st.subheader("📋 報告事項")
     
-    st.subheader("📋 報告事項")
-    
-    # スマホでは1カラムずつにするため、columnsを使わず縦に並べるか、小分けにする
-    done_items = st.multiselect("今日やったこと", ["・トイレ清掃","・作業場清掃","・冷蔵庫清掃","・墨壺清掃","・床水拭き","・床掃き","・amazon発注","・フレーバー発注","・めいらく発注","・スイーツカット","・アルミカット","・季節サワー仕込み","・買い出し","・ゴミ捨て","・ドア、窓拭き","・マウピ、おしぼり補充","・フレーバー補充"], key="done")
-    done_add = st.text_area("追記（はじめに・をつけてね）", key="done_a")
-    next_items = st.multiselect("明日やってほしいこと", ["・トイレ清掃","・作業場清掃","・冷蔵庫清掃","・墨壺清掃","・床水拭き","・床掃き","・amazon発注","・フレーバー発注","・めいらく発注","・スイーツカット","・アルミカット","・季節サワー仕込み","・買い出し","・ゴミ捨て","・ドア、窓拭き","・マウピ、おしぼり補充","・フレーバー補充"], key="next")
-    next_add = st.text_area("追記（はじめに・をつけてね）", key="next_a")
-    buy_items = st.multiselect("ないもの・買ってほしいもの", ["・ウタマロ","・ハイター"], key="buy")
-    buy_add = st.text_area("追記（はじめに・をつけてね）", key="buy_a")
+# スマホでは1カラムずつにするため、columnsを使わず縦に並べるか、小分けにする
+done_items = st.multiselect("今日やったこと", ["・トイレ清掃","・作業場清掃","・冷蔵庫清掃","・墨壺清掃","・床水拭き","・床掃き","・amazon発注","・フレーバー発注","・めいらく発注","・スイーツカット","・アルミカット","・季節サワー仕込み","・買い出し","・ゴミ捨て","・ドア、窓拭き","・マウピ、おしぼり補充","・フレーバー補充"], key="done")
+done_add = st.text_area("追記（はじめに・をつけてね）", key="done_a")
+next_items = st.multiselect("明日やってほしいこと", ["・トイレ清掃","・作業場清掃","・冷蔵庫清掃","・墨壺清掃","・床水拭き","・床掃き","・amazon発注","・フレーバー発注","・めいらく発注","・スイーツカット","・アルミカット","・季節サワー仕込み","・買い出し","・ゴミ捨て","・ドア、窓拭き","・マウピ、おしぼり補充","・フレーバー補充"], key="next")
+next_add = st.text_area("追記（はじめに・をつけてね）", key="next_a")
+buy_items = st.multiselect("ないもの・買ってほしいもの", ["・ウタマロ","・ハイター"], key="buy")
+buy_add = st.text_area("追記（はじめに・をつけてね）", key="buy_a")
 
-    st.subheader("📝 共有事項")
-    names_input = st.text_area("来店された方のお名前", key="names_input", placeholder="カンマや改行で区切ってね")
-    cat1 = st.text_area("① 営業の様子", key="cat1_val")
-    cat2 = st.text_area("② 気づいたこと", key="cat2_val")
-    cat3 = st.text_area("③ その他", key="cat3_val")
+st.subheader("📝 共有事項")
+names_input = st.text_area("来店された方のお名前", key="names_input", placeholder="カンマや改行で区切ってね")
+cat1 = st.text_area("① 営業の様子", key="cat1_val")
+cat2 = st.text_area("② 気づいたこと", key="cat2_val")
+cat3 = st.text_area("③ その他", key="cat3_val")
 
-    st.divider()
+st.divider()
 
-    # お名前のリスト化
-    name_list = [n.strip() for n in re.split(r'[,\n、。]', names_input) if n.strip()]
-    names_str = "\n".join(name_list) if name_list else "なし"
+# お名前のリスト化
+name_list = [n.strip() for n in re.split(r'[,\n、。]', names_input) if n.strip()]
+names_str = "\n".join(name_list) if name_list else "なし"
 
-    # 報告ボタン（横並び。スマホでは自動で縦になる）
-    btn_col1, btn_col2 = st.columns(2)
-    
-    # 保存用データの共通辞書
-    report_data = {"done": done_items, "next": next_items, "buy": buy_items, "names": names_input, "cat1": cat1, "cat2": cat2, "cat3": cat3}
+# 報告ボタン（横並び。スマホでは自動で縦になる）
+btn_col1, btn_col2 = st.columns(2)
 
-    with btn_col1:
-        if st.button("🕒 中間報告を保存", use_container_width=True):
-            mid_txt = f"""
+# 保存用データの共通辞書
+report_data = {"done": done_items, "next": next_items, "buy": buy_items, "names": names_input, "cat1": cat1, "cat2": cat2, "cat3": cat3}
+
+with btn_col1:
+    if st.button("🕒 中間報告を保存", use_container_width=True):
+        mid_txt = f"""
 
 =========================
 【中間報告】
