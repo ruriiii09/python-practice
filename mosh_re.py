@@ -206,8 +206,6 @@ with tab2:
 
 # --- 設定：スマホで見た時にサイドバーが邪魔にならないよう調整 ---
 st.set_page_config(page_title="Mosh Report", layout="centered", initial_sidebar_state="collapsed")
-
-get_worksheet()
         
 st.subheader("📋 報告事項")
     
