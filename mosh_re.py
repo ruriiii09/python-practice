@@ -260,11 +260,11 @@ with btn_col1:
 {cat3 if cat3 else ""}
 
 """
-            save_report(str(datetime.now().date()), "中間", mid_txt, report_data)
-            st.code(mid_txt)
-    with btn_col2:
-        if st.button("🚀 最終報告を保存", use_container_width=True):
-            final_txt = f"""
+        save_report(str(datetime.now().date()), "中間", mid_txt, report_data)
+        st.code(mid_txt)
+with btn_col2:
+    if st.button("🚀 最終報告を保存", use_container_width=True):
+        final_txt = f"""
 ====================================
 **終業報告** 
 ====================================
@@ -299,6 +299,6 @@ with btn_col1:
 【レジ締め過不足】
 ¥45,000 
 """
-            save_report(str(datetime.now().date()), "終業", final_txt, report_data)
-            st.balloons()
-            st.code(final_txt)
+        save_report(str(datetime.now().date()), "終業", final_txt, report_data)
+        st.balloons()
+        st.code(final_txt)
