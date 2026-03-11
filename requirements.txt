@@ -1,8 +1,57 @@
 {\rtf1\ansi\ansicpg932\cocoartf2708
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 Streamlit,gspread,sqlite3,pandas,Credentials,datetime,re}
+\f0\fs22 \cf2 \CocoaLigature0 altair==5.5.0\
+attrs==25.4.0\
+blinker==1.9.0\
+cachetools==6.2.6\
+certifi==2026.1.4\
+cffi==2.0.0\
+charset-normalizer==3.4.4\
+click==8.1.8\
+cryptography==46.0.5\
+gitdb==4.0.12\
+GitPython==3.1.46\
+google-auth==2.48.0\
+google-auth-oauthlib==1.2.4\
+gspread==6.2.1\
+idna==3.11\
+Jinja2==3.1.6\
+jsonschema==4.25.1\
+jsonschema-specifications==2025.9.1\
+MarkupSafe==3.0.3\
+narwhals==2.17.0\
+numpy==2.0.2\
+oauthlib==3.3.1\
+packaging==25.0\
+pandas==2.3.3\
+pillow==11.3.0\
+pip==26.0.1\
+protobuf==6.33.5\
+pyarrow==21.0.0\
+pyasn1==0.6.2\
+pyasn1_modules==0.4.2\
+pycparser==2.23\
+pydeck==0.9.1\
+python-dateutil==2.9.0.post0\
+pytz==2025.2\
+referencing==0.36.2\
+requests==2.32.5\
+requests-oauthlib==2.0.0\
+rpds-py==0.27.1\
+rsa==4.9.1\
+setuptools==58.1.0\
+six==1.17.0\
+smmap==5.0.2\
+streamlit==1.50.0\
+tenacity==9.1.2\
+toml==0.10.2\
+tornado==6.5.4\
+typing_extensions==4.15.0\
+tzdata==2025.3\
+urllib3==2.6.3\
+}
