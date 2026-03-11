@@ -302,6 +302,4 @@ if st.session_state.show_report:
     st.divider() # 区切り線
     st.subheader("📋 生成された報告書（コピー用）")
     # ここで表示すれば、画面の横幅いっぱい（Centered指定の幅）に表示されます
-    st.text_area("長押しで全選択してコピーしてね", 
-                 value=st.session_state.show_report, 
-                 height=450)
+    st.code(value=st.session_state.show_report, height=450)
