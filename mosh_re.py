@@ -160,7 +160,7 @@ with tab1:
     # ステップ1：人数取得
     with st.expander("📊 ステップ1：スプシから人数同期", expanded=False):
         if st.button("スプレッドシートから取得", use_container_width=True):
-            get_worksheet()
+get_worksheet()
 
     # 自動転記ボタン（目立つように配置）
     st.button("📋 中間報告の内容を自動入力", on_click=sync_mid_report, use_container_width=True)
