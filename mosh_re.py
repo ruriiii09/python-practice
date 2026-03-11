@@ -276,5 +276,4 @@ with btn_col2:
 ¥45,000 
 """
         save_report(str(datetime.now().date()), "終業", final_txt, report_data)
-        st.balloons()
         st.code(final_txt)
