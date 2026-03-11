@@ -105,11 +105,12 @@ def get_worksheet():
     raw_repeat = ws.cell(cell.row + 3, cell.col).value
         
     # 安全に数値変換
+try:
     val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
     val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
     all_customer = st.session_state.val_new + st.session_state.val_repeat
-    except Exception as e:
-        st.error(f"取得エラー: {e}")
+except Exception as e:
+    st.error(f"取得エラー: {e}")
     
 
 # --- 2. 報告書成形用ヘルパー ---
