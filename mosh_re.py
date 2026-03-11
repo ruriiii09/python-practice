@@ -254,10 +254,10 @@ with btn_col2:
 {format_items(buy_items, buy_add)}
 
 【来店人数】
-新規　　　{val_new}名
-リピ　　　{val_repeat}名
+新規　　　{st.session_state.val_new}名
+リピ　　　{st.session_state.val_repeat}名
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
-計　　　　{all_customer}名
+計　　　　{st.session_state.all_costomer}名
 
 【来店者記録】
 {names_str}
