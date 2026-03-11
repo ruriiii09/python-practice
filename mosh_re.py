@@ -95,7 +95,7 @@ def get_worksheet():
     sh = client.open_by_url(SHEET_URL)
     ws =sh.worksheet("データ")
 
-
+try:
     # 3. 指定した数字を含むセルを検索
     cell = ws.cell(2,dt_day+1)
     
@@ -105,7 +105,6 @@ def get_worksheet():
     raw_repeat = ws.cell(cell.row + 3, cell.col).value
         
     # 安全に数値変換
-try:
     val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
     val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
     all_customer = st.session_state.val_new + st.session_state.val_repeat
