@@ -104,9 +104,6 @@ def get_worksheet():
     val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
     val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
     all_customer = val_new + val_repeat
-    if cell is None or cell.value is None:
-            st.error(f"スプレッドシートの {dt_day}日の列が見つかりません。")
-            return
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
@@ -126,8 +123,8 @@ if st.sidebar.button("スプシから取得"):
     try:
         ws = get_worksheet()
         now_date = datetime.now().strftime("%Y/%m/%d")
-        st.sidebar.text(f"新規：{cell_new.value or 0}名")
-        st.sidebar.text(f"リピーター：{cell_repeat.value or 0}名")
+        st.sidebar.text(f"新規：{val_new}名")
+        st.sidebar.text(f"リピーター：{val_repeat}名")
         st.sidebar.text(f"計：{all_customer}名")
     except Exception as e:
         st.error(f"まだ人数が入力されていません: {e}")
@@ -279,8 +276,8 @@ with btn_col2:
 {format_items(buy_items, buy_add)}
 
 【来店人数】
-新規　　　{cell_new.value or 0}名
-リピ　　　{cell_repeat.value or 0}名
+新規　　　{val_new}名
+リピ　　　{val_repeat}名
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 計　　　　{all_customer}名
 
