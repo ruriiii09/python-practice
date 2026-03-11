@@ -123,20 +123,12 @@ def get_worksheet():
 def get_mid_report_time():
     today = str(datetime.now().date())
     # 今日の中間報告の最新1件から作成時間だけ取得
+    query = "SELECT created_at FROM daily_reports_v2 WHERE report_date = ? AND report_type = '中間' ORDER BY created_at DESC LIMIT 1"
     # 1. 曜日のリストを用意
     wd_list = ["月", "火", "水", "木", "金", "土", "日"]
     
     # 2. フォーマットに合わせて文字列を作る
-    date_str = datetime.now().strftime(f"%m月%d日({wd_list[datetime.now().weekday()]})")
-    query = "SELECT created_at FROM daily_reports_v2 WHERE report_date = ? AND report_type = '中間' ORDER BY created_at DESC LIMIT 1"
-    try:
-        df = pd.read_sql(query, conn, params=(today,))
-        if not df.empty:
-            # "2026-03-11 15:30:45" の 11文字目から5文字分（15:30）を抜き出す
-            return df.iloc[0]['created_at'][6:10]
-    except:
-        pass
-    return None
+    st.session_state.date_str = datetime.now().strftime(f"%m月%d日({wd_list[datetime.now().weekday()]})")
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
@@ -275,7 +267,7 @@ with btn_col2:
         mid_time = get_mid_report_time()
         mid_info = f"（{mid_time} 中間報告済み）" if mid_time else "（中間報告なし）"
         final_txt = f"""
-**終業報告** {date_str}
+**終業報告** {st.session_state.date_str}
 
 【今日やったこと】
 {format_items(done_items, done_add)}
