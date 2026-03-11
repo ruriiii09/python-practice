@@ -108,7 +108,7 @@ def get_worksheet():
             st.session_state.val_new = int(raw_new) if str(raw_new).isdigit() else 0
             st.session_state.val_repeat = int(raw_repeat) if str(raw_repeat).isdigit() else 0
             st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
-            st.text("新規 : ", [st.session_state.val_new],"名")
+            st.text(f"新規 : {st.session_state.val_new}名")
             st.success("スプレッドシートから同期したよ！")
         else:
             st.warning(f"スプレッドシートに {dt_day}日の列が見つからないみたい。")
