@@ -120,6 +120,18 @@ def get_worksheet():
     except Exception as e:
         st.error(f"データ取得中にエラーが起きたよ: {e}")
 
+def get_mid_report_time():
+    today = str(datetime.now().date())
+    # 今日の中間報告の最新1件から作成時間だけ取得
+    query = "SELECT created_at FROM daily_reports_v2 WHERE report_date = ? AND report_type = '中間' ORDER BY created_at DESC LIMIT 1"
+    try:
+        df = pd.read_sql(query, conn, params=(today,))
+        if not df.empty:
+            # "2026-03-11 15:30:45" の 11文字目から5文字分（15:30）を抜き出す
+            return df.iloc[0]['created_at'][11:16]
+    except:
+        pass
+    return None
 
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
@@ -232,9 +244,7 @@ with btn_col1:
     if st.button("🕒 中間報告を保存", use_container_width=True):
         mid_txt = f"""
 
-=========================
 【中間報告】
-=========================
 前半でやったこと
 {format_items(done_items, done_add)}
 
@@ -257,10 +267,10 @@ with btn_col1:
         #st.code(mid_txt)
 with btn_col2:
     if st.button("🚀 最終報告を保存", use_container_width=True):
+        mid_time = get_mid_report_time()
+        mid_info = f"（{mid_time} 中間報告済み）" if mid_time else "（中間報告なし）"
         final_txt = f"""
-====================================
-**終業報告** 
-====================================
+**終業報告** {mid_info}
 
 【今日やったこと】
 {format_items(done_items, done_add)}
