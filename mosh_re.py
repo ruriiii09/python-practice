@@ -16,9 +16,6 @@ if 'all_customer' not in st.session_state:
 #dt_year = datetime.now().year
 #dt_month = datetime.now().month
 dt_day = datetime.now().day
-cell_new = ""
-cell_repeat = ""
-all_customer = 0
 
 # --- 1. データベースの初期設定（カラムを拡張） ---
 def init_db():
@@ -111,7 +108,7 @@ def get_worksheet():
             st.session_state.val_new = int(raw_new) if str(raw_new).isdigit() else 0
             st.session_state.val_repeat = int(raw_repeat) if str(raw_repeat).isdigit() else 0
             st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
-            st.text("新規 : ", [session_state.val_new],"名")
+            st.text("新規 : ", [st.session_state.val_new],"名")
             st.success("スプレッドシートから同期したよ！")
         else:
             st.warning(f"スプレッドシートに {dt_day}日の列が見つからないみたい。")
@@ -258,7 +255,7 @@ with btn_col2:
 新規　　　{st.session_state.val_new}名
 リピ　　　{st.session_state.val_repeat}名
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
-計　　　　{all_costomer}名
+計　　　　{st.session_state.all_customer}名
 
 【来店者記録】
 {names_str}
