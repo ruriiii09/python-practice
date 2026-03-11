@@ -250,7 +250,9 @@ with btn_col1:
 
 """
         save_report(str(datetime.now().date()), "中間", mid_txt, report_data)
-        st.code(mid_txt)
+        # 生成した文章を session_state に保存
+        st.session_state.show_report = mid_report
+        #st.code(mid_txt)
 with btn_col2:
     if st.button("🚀 最終報告を保存", use_container_width=True):
         final_txt = f"""
@@ -289,4 +291,15 @@ with btn_col2:
 ¥45,000 
 """
         save_report(str(datetime.now().date()), "終業", final_txt, report_data)
-        st.code(final_txt)
+        # 生成した文章を session_state に保存
+        st.session_state.show_report = final_report
+        #st.code(final_txt)
+
+# 🚨 ここがポイント！カラム（with col_...）から「出た」ところで表示する
+if st.session_state.show_report:
+    st.divider() # 区切り線
+    st.subheader("📋 生成された報告書（コピー用）")
+    # ここで表示すれば、画面の横幅いっぱい（Centered指定の幅）に表示されます
+    st.text_area("長押しで全選択してコピーしてね", 
+                 value=st.session_state.show_report, 
+                 height=450)
