@@ -149,7 +149,7 @@ else:
 
         
 # --- メイン画面：ステップ2：報告内容入力 ---
-st.header("📋 ステップ2：報告事項の入力")
+st.header("📋 報告事項の入力")
 cat4 = st.text("月：めいらく発注 --- 火：可燃、ダンボ（第1,3は全部捨てる） --- 水：床水拭き --- 金：可燃、ダンボ")
 col1, col2, col3 = st.columns(3)
 
@@ -278,8 +278,8 @@ with btn_col2:
 {format_items(buy_items, buy_add)}
 
 【来店人数】
-新規　　　{cell_new.value}名
-リピ　　　{cell_repeat.value}名
+新規　　　{cell_new.value or 0}名
+リピ　　　{cell_repeat.value or 0}名
 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣
 計　　　　{all_customer}名
 
