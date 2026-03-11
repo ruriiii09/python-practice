@@ -96,17 +96,24 @@ def get_worksheet():
     ws =sh.worksheet("データ")
 
     try:
+        # 2. 今日の日付のセルを探す
         cell = ws.cell(2, dt_day + 1)
-        raw_new = ws.cell(cell.row + 2, cell.col).value
-        raw_repeat = ws.cell(cell.row + 3, cell.col).value
         
-        # セッション状態（アプリ全体）に保存
-        st.session_state.val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
-        st.session_state.val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
-        st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
-    except Exception as e:
-        st.error(f"取得エラー: {e}")
+        # 🚨 ここが重要：cellが取得できなかった場合の安全策
+        if cell and cell.value:
+            raw_new = ws.cell(cell.row + 2, cell.col).value
+            raw_repeat = ws.cell(cell.row + 3, cell.col).value
+            
+            # 数値に変換（全角数字や空欄を考慮）
+            st.session_state.val_new = int(raw_new) if str(raw_new).isdigit() else 0
+            st.session_state.val_repeat = int(raw_repeat) if str(raw_repeat).isdigit() else 0
+            st.session_state.all_customer = st.session_state.val_new + st.session_state.val_repeat
+            st.success("スプレッドシートから同期したよ！")
+        else:
+            st.warning(f"スプレッドシートに {dt_day}日の列が見つからないみたい。")
 
+    except Exception as e:
+        st.error(f"データ取得中にエラーが起きたよ: {e}")
 # --- 2. 報告書成形用ヘルパー ---
 def format_items(selected, added):
     items = [f"{item}" for item in selected]
