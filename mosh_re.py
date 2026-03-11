@@ -97,13 +97,13 @@ def get_worksheet():
     
     # 4. その下のセル(行を+1)を取得 グローバル化
     # セルの値を数値として取得（空なら0にする）
-        raw_new = ws.cell(cell.row + 2, cell.col).value
-        raw_repeat = ws.cell(cell.row + 3, cell.col).value
+    raw_new = ws.cell(cell.row + 2, cell.col).value
+    raw_repeat = ws.cell(cell.row + 3, cell.col).value
         
-        # 安全に数値変換
-        val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
-        val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
-        all_customer = val_new + val_repeat
+    # 安全に数値変換
+    val_new = int(raw_new) if raw_new and str(raw_new).isdigit() else 0
+    val_repeat = int(raw_repeat) if raw_repeat and str(raw_repeat).isdigit() else 0
+    all_customer = val_new + val_repeat
     if cell is None or cell.value is None:
             st.error(f"スプレッドシートの {dt_day}日の列が見つかりません。")
             return
