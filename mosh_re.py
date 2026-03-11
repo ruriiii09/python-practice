@@ -131,6 +131,16 @@ st.set_page_config(page_title="終業報告アプリ", layout="wide")
 st.title("終業報告アプリ")
         
 # --- メイン画面：ステップ2：報告内容入力 ---
+st.markdown("""
+    <style>
+    /* st.code の中身を折り返し表示にする */
+    code {
+        white-space: pre-wrap !important;
+        word-break: break-all !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.header("📋 報告事項の入力")
 cat4 = st.text("月：めいらく発注 --- 火：可燃、ダンボ（第1,3は全部捨てる） --- 水：床水拭き --- 金：可燃、ダンボ")
 col1, col2, col3 = st.columns(3)
