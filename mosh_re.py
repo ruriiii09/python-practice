@@ -137,10 +137,7 @@ def format_items(selected, added):
         items.append(f"{added}")
     return "\n".join(items) if items else "なし"
 
-# --- 3. アプリ設定 ---
-st.set_page_config(page_title="終業報告アプリ", layout="wide")
-st.title("終業報告アプリ")
-        
+# --- 3. アプリ設定 ---     
 # --- メイン画面：ステップ2：報告内容入力 ---
 st.markdown("""
     <style>
