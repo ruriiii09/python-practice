@@ -229,7 +229,7 @@ st.divider()
 
 # お名前のリスト化
 name_list = [n.strip() for n in re.split(r'[,\n、。]', names_input) if n.strip()]
-names_str = "\n".join(name_list) if name_list else "なし"
+names_str = "、".join(name_list) if name_list else "なし"
 
 # 報告ボタン（横並び。スマホでは自動で縦になる）
 btn_col1, btn_col2 = st.columns(2)
